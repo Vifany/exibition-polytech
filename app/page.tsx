@@ -4,6 +4,7 @@ import Card from "./components/card";
 import Drawer from "./components/drawer";
 import styled from "styled-components";
 import { useState } from "react";
+import all from "./data.json";
 
 
 const CardContainer = styled.div`
@@ -30,13 +31,36 @@ const RightRow = styled.div`
   align-items: center;
 `;
 
+interface Drawer {
+  drawerHead: string;
+  drawerDescription: string;
+  participants: string[];
+}
+
+interface Card {
+  cardHead: string;
+  cardMain: string;
+  drawer: Drawer;
+  cardColor: string;
+}
+
 type DrawerProps = {
   header: string;
   description: string;
   participants: string[];
 };
 
+const StyledFooter = styled.footer`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 10vh;
+  background-color: #333;
+  color: white;
+`;
+
 export default function Home() {
+  const cards = all as {left:Card[], right:Card[]};
   const [isOpen, setIsOpen] = useState(false);
   const [drawerSide, setDrawerSide] = useState<"left" | "right">("left");
   const [drawerProps, setDrawerProps] = useState<DrawerProps>(
@@ -81,60 +105,41 @@ export default function Home() {
       />
       <CardContainer>
       <LeftRow>
-      <Card
-        onClick={()=> handleOpen("left", {
-          header: "Drawer Header",
-          description: "This is a drawer component.",
-          participants: testParticipants,
-        
-        })}
-        side = "left"
-        header="Медицина"
-        text="Анонс медицинской выставки."
-        cardColor="#FB6D48"
-      />
-      <Card
-        onClick={()=> handleOpen("left", {
-          header: "Drawer Header2",
-          description: "This is a drawer component.",
-          participants: ["Participant 1", "Participant 2", "Participant 3"],
-        
-        })
-        }
-        side = "left"
-        header="Инноватика и управление"
-        text="Новые технологии в бизнесе"
-        cardColor="#673F69"
-      />
+        {cards.left.map((card, index) => (
+          <Card
+            onClick={()=> handleOpen("left", {
+              header: card.drawer.drawerHead,
+              description: card.drawer.drawerDescription,
+              participants: card.drawer.participants,
+            })}
+            side = "left"
+            header={card.cardHead}
+            text={card.cardMain}
+            cardColor={card.cardColor}
+            key={index}
+          />
+        ))}
       </LeftRow>
       <RightRow>
-      <Card
-        onClick={()=> handleOpen("right", {
-          header: "Drawer Header3",
-          description: "This is a drawer component.",
-          participants: ["Participant 1", "Participant 2", "Participant 3"],
-        
-        })}
-        side = "right"
-        header="Солнечная энергия"
-        text="Чистая энергия в каждый дом"
-        cardColor="#FFAF45"
-      />
-      <Card
-        onClick={()=> handleOpen("right", {
-          header: "Drawer Header4",
-          description: "This is a drawer component.",
-          participants: ["Participant 1", "Participant 2", "Participant 3"],
-        
-        })
-        }
-        side = "right"
-        header="Hello, World!"
-        text="This is a card component."
-        cardColor="#FDAF7B"
-      />
+        {cards.right.map((card, index) => (
+          <Card
+            onClick={()=> handleOpen("right", {
+              header: card.drawer.drawerHead,
+              description: card.drawer.drawerDescription,
+              participants: card.drawer.participants,
+            })}
+            side = "right"
+            header={card.cardHead}
+            text={card.cardMain}
+            cardColor={card.cardColor}
+            key={index}
+          />
+        ))}
       </RightRow>
     </CardContainer>
+    <StyledFooter>
+      Vifany&copy; 2021
+    </StyledFooter>
     </StyledMain>
   );
 }

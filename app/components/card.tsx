@@ -21,6 +21,8 @@ const CardContainer = styled.div<{ backgroundColor: string }>`
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  padding-bottom: 0;
+  overflow-x: hidden;
 `;
 
 const CardHeader = styled.h2`
@@ -32,16 +34,23 @@ const CardHeader = styled.h2`
 const CardText = styled.p`
   margin-left: 3vh;
   margin-right: 3vh;
-  font-size: 6vw;
-  text-align: justify;
+  margin-bottom: 0;
+  margin-top: 0;
+  font-size: 7.5vw;
+  text-align: center;
   text-transform: uppercase;
   font-weight: 900;
-  letter-spacing: 1.73em;
+  letter-spacing: 1em;
   overflow-y: hidden;
+  overflow-x: hidden;
   overflow-wrap: anywhere;
-  transition: letter-spacing 380ms linear;
+  transition: letter-spacing 380ms linear,
+    font-size 380ms cubic-bezier(0.075, 0.82, 0.165, 1);
   ${CardContainer}:hover &{
     letter-spacing: 0;
+    text-align: left;
+    font-size: 9vh;
+    overflow-wrap: normal;
   }`;
 
 const Card: React.FC<CardProps> = ({ 

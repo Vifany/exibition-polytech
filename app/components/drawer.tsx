@@ -42,6 +42,19 @@ const DrawerParticipant = styled.li`
   margin-bottom: 5px;
 `;
 
+const IconButton = styled.button`
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 10px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 5vh;
+  font-weight: bold;
+  color: #000;
+`;
+
 const Drawer: React.FC<DrawerProps> = ({
   drawerSide,
   header,
@@ -51,7 +64,8 @@ const Drawer: React.FC<DrawerProps> = ({
   handleClose,
 }) => {
   return (
-    <DrawerContainer drawerSide={drawerSide} isOpen={isOpen} onClick={handleClose}>
+    <DrawerContainer drawerSide={drawerSide} isOpen={isOpen} >
+      <IconButton onClick={handleClose}>X</IconButton>
       <DrawerHeader>{header}</DrawerHeader>
       <DrawerDescription>{description}</DrawerDescription>
       <DrawerParticipants>
