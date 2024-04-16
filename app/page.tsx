@@ -138,7 +138,7 @@ export default function Home() {
       </RightRow>
     </CardContainer>
     <StyledFooter>
-      Vifany&copy; 2021
+      Vifany&copy; 2024
     </StyledFooter>
     </StyledMain>
   );
